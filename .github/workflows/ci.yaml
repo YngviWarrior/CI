@@ -18,10 +18,15 @@ jobs:
       - run: go test
       - run: go run math.go
 
-      - run: echo "Make envfile"
-        env:
-          SECRET: ${{ secrets.SECRET_KEY }}
-          
+      - name: Create env file
+        run: |
+          touch .env
+          echo POSTGRES_USER=123456 > .env
+          echo POSTGRES_PASSWORD=131213 > .env
+          cat .env
+        env: 
+          POSTGRES_USER: "123456"
+          POSTGRES_PASSWORD: "13213"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
