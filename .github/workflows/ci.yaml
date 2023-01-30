@@ -18,6 +18,14 @@ jobs:
       - run: go test
       - run: go run math.go
 
+      - name: Test ENV_FILE
+        run: |
+          echo ${{ secrets.ENV_FILE }}
+
+      - name: Create .env
+        run: |
+          echo ${{ secrets.ENV_FILE }} > .env      
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
 
